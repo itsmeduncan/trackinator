@@ -1,0 +1,5 @@
+- @victims.each do |victim|
+  %h1= victim.name
+  
+  .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
+    .chart
