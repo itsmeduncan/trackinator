@@ -1,5 +1,9 @@
 ## Trackinator
 
+### See it
+
+http://trackinator.heroku.com/
+
 ### How-to
 
 * rake db:seed
