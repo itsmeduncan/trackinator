@@ -1,6 +1,6 @@
-= Trackinator
+=Trackinator
 
-== How-to
+==How-to
 
 * rake db:seed
 * rake visit:visitable
