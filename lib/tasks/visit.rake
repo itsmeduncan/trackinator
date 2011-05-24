@@ -6,7 +6,7 @@ namespace :visit do
   end
   
   desc "Visit visitable"
-  task :all => :environment do
+  task :visitable => :environment do
     Victim.visitable.collect(&:visit!)
   end
 
