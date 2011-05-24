@@ -17,6 +17,10 @@ group :test, :development do
   gem "factory_girl_rails"
 end
 
+group :production do
+  gem "pg"
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
