@@ -40,6 +40,38 @@ describe Victim do
     end
   end
   
+  describe "Victim#create_from_arguments" do
+    it "should create a new Victim" do
+      victim_attributes = Factory.attributes_for(:victim)
+      lambda {
+        Victim.create_from_arguments(victim_attributes)
+      }.should change(Victim, :count).from(0).to(1)
+    end
+    
+    it "should not create a new Victim" do
+      victim_attributes = Factory.attributes_for(:victim, :name => nil)
+      lambda {
+        Victim.create_from_arguments(victim_attributes)
+      }.should_not change(Victim, :count).from(0).to(1)
+    end
+  end
+  
+  describe "Victim#destroy_from_arguments" do
+    it "should destroy the victim" do
+      victim = Factory(:victim)
+      lambda {
+        Victim.destroy_from_arguments({:name => victim.name})
+      }.should change(Victim, :count).from(1).to(0)
+    end
+    
+    it "should fail to destroy the victim" do
+      victim = Factory(:victim)
+      lambda {
+        Victim.destroy_from_arguments({:name => nil})
+      }.should_not change(Victim, :count).from(1).to(0)
+    end
+  end
+  
   describe "#visit!" do
     it "should create a Visit" do
       victim = Factory.build(:victim)
@@ -55,8 +87,5 @@ describe Victim do
         victim.visit!
       }.should change(victim, :last_visit)
     end
-    
-    it "should use Nokogiri"
-    it "should create a Visit"
   end
 end

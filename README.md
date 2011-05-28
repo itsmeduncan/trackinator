@@ -11,6 +11,16 @@ http://trackinator.heroku.com/
 * ???
 * Profit
 
+### Victims
+
+#### Adding
+
+  rake 'trackinator:add[Fu,http://google.com, h1]'
+
+#### Removing
+
+  rake 'trackinator:remove[Fu]'
+
 ### License
 
 Copyright (C) 2011 by Duncan Grazier
