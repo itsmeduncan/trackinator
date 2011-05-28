@@ -15,11 +15,14 @@ http://trackinator.heroku.com/
 
 #### Adding
 
-  rake 'trackinator:add[Fu,http://google.com, h1]'
-
+```ruby
+rake 'trackinator:add[Fu,http://google.com, h1]'
+```
 #### Removing
 
-  rake 'trackinator:remove[Fu]'
+```ruby
+rake 'trackinator:remove[Fu]'
+```
 
 ### License
 
