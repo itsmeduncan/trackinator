@@ -8,7 +8,7 @@ http://trackinator.heroku.com/
 
 * rake db:seed
 * rake visit:visitable
-* ???
+* ????
 * Profit
 
 ### Victims
