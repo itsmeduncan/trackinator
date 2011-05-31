@@ -4,6 +4,10 @@
 
 http://trackinator.heroku.com/
 
+### Watch it build
+
+http://travis-ci.org/#!/itsmeduncan/trackinator
+
 ### How-to
 
 * rake db:seed
