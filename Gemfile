@@ -11,6 +11,7 @@ gem 'haml'
 gem 'sass'
 gem 'curb'
 gem 'nokogiri'
+gem 'hoptoad_notifier'
 
 group :test, :development do
   gem "rspec-rails"
