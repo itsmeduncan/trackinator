@@ -6,4 +6,8 @@ module VictimsHelper
     end
   end
   
+  def pretty_time datetime
+    datetime.strftime("%D %R")
+  end
+  
 end

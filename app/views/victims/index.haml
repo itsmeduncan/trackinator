@@ -1,5 +1,24 @@
-- @victims.each do |victim|
-  %h1= victim.name
+.navigation
+  %ul
+    %li= link_to 'Tables', "#", :"data-target" => 'tables'
+    %li= link_to 'Graphs', "#", :"data-target" => 'graphs'
+    
+#tables.hidden
+  - @victims.each do |victim|
+    %h1= victim.name
+    %table
+      %tr
+        %th Date
+        %th Data
+    
+      - victim.visits.each do |visit|
+        %tr
+          %td= pretty_time visit.created_at
+          %td= visit.value
+
+#graphs
+  - @victims.each do |victim|
+    %h1= victim.name
   
-  .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
-    .chart
+    .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
+      .chart
