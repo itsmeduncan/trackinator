@@ -3,9 +3,9 @@
     %li= link_to 'Back', :back
     %li
       Download
-      = link_to 'CSV', download_path(:id => @victim, :format => "csv")
-      = link_to 'JSON', download_path(:id => @victim, :format => "json")
-      = link_to 'XML', download_path(:id => @victim, :format => "xml")
+      = link_to 'CSV', download_path(:id => @victim.to_param, :format => "csv")
+      = link_to 'JSON', download_path(:id => @victim.to_param, :format => "json")
+      = link_to 'XML', download_path(:id => @victim.to_param, :format => "xml")
 
   %h2= @victim.name
 
