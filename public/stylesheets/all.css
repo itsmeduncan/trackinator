@@ -46,3 +46,5 @@ body {
     margin: 0 0 10px 0; }
   body .graph {
     width: 90%; }
+  body .footer {
+    margin: 0 0 10px 10px; }
