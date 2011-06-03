@@ -15,19 +15,6 @@ http://travis-ci.org/#!/itsmeduncan/trackinator
 * ???
 * Profit
 
-### Victims
-
-#### Adding
-
-```ruby
-rake 'trackinator:add[Fu,http://google.com, h1]'
-```
-#### Removing
-
-```ruby
-rake 'trackinator:remove[Fu]'
-```
-
 ### License
 
 Copyright (C) 2011 by Duncan Grazier
