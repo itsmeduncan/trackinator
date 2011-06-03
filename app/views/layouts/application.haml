@@ -5,7 +5,9 @@
     = javascript_include_tag "jquery.min.js", "jquery_ujs.js", "highcharts", "application"
 
     = csrf_meta_tag
-
+    
+    = render :partial => 'shared/analytics'
+    
   %body
     %h1 Trackinator
 
