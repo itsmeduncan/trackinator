@@ -8,7 +8,7 @@
             %th Date
             %th Data
     
-          - victim.visits.limit(Victim::VISIBLE_VISITS).each do |visit|
+          - victim.successful_visits.limit(Victim::VISIBLE_VISITS).each do |visit|
             %tr
               %td= pretty_time visit.created_at
               %td= visit.value.to_i

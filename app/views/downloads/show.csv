@@ -1,4 +1,4 @@
 date,value
-<% @victim.visits.each do |visit| %>
+<% @victim.successful_visits.each do |visit| %>
 <%= visit.created_at %>,<%= visit.value %>
 <% end %>

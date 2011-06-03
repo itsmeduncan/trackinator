@@ -17,8 +17,17 @@
       %td Visit interval
       %td= @victim.interval
     %tr
+      %td URL
+      %td= @victim.url
+    %tr
       %td CSS Selector
       %td "$('#{@victim.selector}')"
+    %tr
+      %td Successful Visits
+      %td= @victim.successful_visits.count
+    %tr
+      %td Failed Visits
+      %td= @victim.unsuccessful_visits.count
 
 #tables
   .table
@@ -27,7 +36,7 @@
         %th Date
         %th Data
 
-      - @victim.visits.each do |visit|
+      - @victim.successful_visits.each do |visit|
         %tr
           %td= pretty_time visit.created_at
           %td= visit.value.to_i

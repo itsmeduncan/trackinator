@@ -6,5 +6,6 @@ class Visit < ActiveRecord::Base
   default_scope order('created_at DESC')
   
   scope :successful, where(:status => 200)
-
+  
+  scope :unsuccessful, where("status != 200")
 end

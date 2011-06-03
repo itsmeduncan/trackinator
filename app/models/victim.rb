@@ -4,12 +4,15 @@ class Victim < ActiveRecord::Base
   
   has_many :visits, :dependent => :destroy
   
+  has_many :successful_visits, :class_name => "Visit", :dependent => :destroy, :conditions => ['status = 200']
+  has_many :unsuccessful_visits, :class_name => "Visit", :dependent => :destroy, :conditions => ['status != 200']
+  
   default_scope order("name ASC")
   
   VISIBLE_VISITS = 10
   
   before_validation :slugify
-
+  
   class << self
     def visitable 
       all.select { |victim| Time.now > (victim.last_visit + victim.interval) }
@@ -46,7 +49,9 @@ class Victim < ActiveRecord::Base
     html  = Nokogiri::HTML(curl.body_str)
     value = from_selector(html, selector)
     
-    Visit.create :victim_id => id, :value => value, :status => curl.response_code
+    status = value.blank? ? 404 : curl.response_code
+    
+    Visit.create :victim_id => id, :value => value.to_f, :status => status
   ensure
     update_attribute(:last_visit, Time.now)
   end
@@ -62,7 +67,7 @@ class Victim < ActiveRecord::Base
     end
   
     def from_selector html, selector
-      html.css(selector).inner_text.gsub(/[^0-9]/,'').to_f
+      html.css(selector).inner_text.gsub(/[^0-9]/,'')
     end
 
 end

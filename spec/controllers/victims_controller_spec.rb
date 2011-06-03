@@ -9,7 +9,7 @@ describe VictimsController do
     end
     
     it "should get all of the victims" do
-      Victim.should_receive(:all).with(:include => :visits).once.and_return([])
+      Victim.should_receive(:all).with(:include=>[:visits, :unsuccessful_visits, :successful_visits]).once.and_return([])
       get :index
     end
   end
@@ -17,7 +17,7 @@ describe VictimsController do
   describe "#show" do
     it "should find the Victim" do
       victim = Factory(:victim)
-      Victim.should_receive(:find_by_slug).with(victim.slug, :include => :visits).and_return(victim)
+      Victim.should_receive(:find_by_slug).with(victim.slug, :include=>[:visits, :unsuccessful_visits, :successful_visits]).and_return(victim)
       
       get :show, :id => victim.slug
       
