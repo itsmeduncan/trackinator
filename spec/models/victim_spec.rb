@@ -83,9 +83,24 @@ describe Victim do
 
     it "should always update #last_visit" do
       victim = Factory(:victim)
+      Curl::Easy.should_receive(:perform).with(victim.url).and_return(mock(:body_str => "", :response_code => 200))
       lambda {
         victim.visit!
       }.should change(victim, :last_visit)
+    end
+  end
+  
+  describe "#to_param" do
+    it "should use the slug" do
+      victim = Factory.build(:victim, :slug => "foo-bar")
+      victim.to_param.should == "foo-bar"
+    end
+  end
+  
+  describe "before save" do
+    it "should set the slug" do
+      victim = Factory(:victim, :name => "Foo")
+      victim.slug.should == "foo"
     end
   end
 end

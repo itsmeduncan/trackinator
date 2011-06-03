@@ -1,0 +1,41 @@
+.navigation
+  %ul
+    %li= link_to 'Back', :back
+    %li
+      Download
+      = link_to 'CSV', download_path(:id => @victim, :format => "csv")
+      = link_to 'JSON', download_path(:id => @victim, :format => "json")
+      = link_to 'XML', download_path(:id => @victim, :format => "xml")
+
+  %h2= @victim.name
+
+  %table
+    %tr
+      %td Last visited
+      %td= @victim.last_visit.to_s
+    %tr
+      %td Visit interval
+      %td= @victim.interval
+    %tr
+      %td CSS Selector
+      %td "$('#{@victim.selector}')"
+
+#tables
+  .table
+    %table
+      %tr
+        %th Date
+        %th Data
+
+      - @victim.visits.each do |visit|
+        %tr
+          %td= pretty_time visit.created_at
+          %td= visit.value.to_i
+  .clear
+  
+#graphs
+  .graph
+    .chart-container{ :data => data_array(@victim).to_json, :name => @victim.name }
+      .chart
+
+  .clear

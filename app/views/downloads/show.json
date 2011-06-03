@@ -1,0 +1,10 @@
+{
+  "visits" : [
+  <% @victim.visits.each do |visit| %>
+    {
+      "date" : "<%= visit.created_at %>",
+      "value" : <%= visit.value.to_i %>
+    }<%= @victim.visits.last != visit ? "," : "" %>
+  <% end %> 
+  ]
+}

@@ -1,10 +1,14 @@
 class Victim < ActiveRecord::Base
-  validates_presence_of :name, :url, :selector, :interval, :last_visit
+  validates_presence_of :name, :url, :selector, :interval, :last_visit, :slug
   validates_uniqueness_of :name
   
   has_many :visits, :dependent => :destroy
   
   default_scope order("name ASC")
+  
+  VISIBLE_VISITS = 10
+  
+  before_validation :slugify
 
   class << self
     def visitable 
@@ -47,7 +51,15 @@ class Victim < ActiveRecord::Base
     update_attribute(:last_visit, Time.now)
   end
   
+  def to_param
+    slug
+  end
+  
   private
+  
+    def slugify
+      self.slug = self.name.to_s.downcase.gsub(/[^A-Z0-9]/i, '-')
+    end
   
     def from_selector html, selector
       html.css(selector).inner_text.gsub(/[^0-9]/,'').to_f

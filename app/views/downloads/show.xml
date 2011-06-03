@@ -1,0 +1,10 @@
+<xml>
+  <visits>
+    <% @victim.visits.each do |visit| %>
+    <visit>
+      <date><%= visit.created_at.to_s %></date>
+      <value><%= visit.value.to_i %></value>
+    </visit>
+    <% end %>
+  </visits>
+</xml>

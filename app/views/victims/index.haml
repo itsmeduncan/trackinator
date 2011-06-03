@@ -1,24 +1,31 @@
 .navigation
   %ul
-    %li= link_to 'Tables', "#", :"data-target" => 'tables'
-    %li= link_to 'Graphs', "#", :"data-target" => 'graphs'
+    %li= link_to 'Tables', "#target"
+    %li= link_to 'Graphs', "#graphs"
     
-#tables.hidden
-  - @victims.each do |victim|
-    %h1= victim.name
-    %table
-      %tr
-        %th Date
-        %th Data
+#tables
+  - @victims.each_slice(3) do |victim_slice|
+    - victim_slice.each do |victim|
+      .table
+        %h2= link_to "#{victim.name}", victim
+        %table
+          %tr
+            %th Date
+            %th Data
     
-      - victim.visits.each do |visit|
-        %tr
-          %td= pretty_time visit.created_at
-          %td= visit.value
+          - victim.visits.limit(Victim::VISIBLE_VISITS).each do |visit|
+            %tr
+              %td= pretty_time visit.created_at
+              %td= visit.value.to_i
+                       
+    .clear
 
 #graphs
-  - @victims.each do |victim|
-    %h1= victim.name
-  
-    .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
-      .chart
+  - @victims.each_slice(2) do |victim_slice|
+    - victim_slice.each do |victim|
+      .graph
+        %h2= link_to "#{victim.name}", victim
+        .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
+          .chart
+
+    .clear
