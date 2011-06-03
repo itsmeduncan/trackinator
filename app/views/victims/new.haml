@@ -1,0 +1,19 @@
+.navigation
+  %ul
+    %li= link_to 'Back', :back
+
+  %h2 New Victim
+
+.form
+  - unless @victim.errors.empty?
+    %ul.errors
+      - @victim.errors.full_messages.each do |error_message|
+        %li= error_message
+  
+  
+  - form_for @victim do |victim|
+    = render :partial => "form", :locals => { :victim => victim }
+    
+    .field
+      = victim.submit
+      .clear

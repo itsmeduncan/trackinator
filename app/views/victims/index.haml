@@ -1,18 +1,25 @@
+- if editable?
+  .navigation
+    %ul
+      %li= link_to 'New Victim', new_victim_path
+
 #tables
   - @victims.each_slice(3) do |victim_slice|
     - victim_slice.each do |victim|
       .table
         %h2= link_to "#{victim.name}", victim_path(victim.to_param)
-        %table
-          %tr
-            %th Date
-            %th Data
-    
-          - victim.successful_visits.limit(Victim::VISIBLE_VISITS).each do |visit|
+        - if victim.displayable?
+          %table
             %tr
-              %td= pretty_time visit.created_at
-              %td= visit.value.to_i
-                       
+              %th Date
+              %th Data
+    
+            - victim.successful_visits.limit(Victim::VISIBLE_VISITS).each do |visit|
+              %tr
+                %td= pretty_time visit.created_at
+                %td= visit.value.to_i
+        - else
+          %span Nothing to see here
     .clear
 
 #graphs
@@ -20,7 +27,11 @@
     - victim_slice.each do |victim|
       .graph
         %h2= link_to "#{victim.name}", victim_path(victim.to_param)
-        .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
-          .chart
 
+        - if victim.displayable?
+          .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
+            .chart
+        - else
+          .chart-container
+            %span Nothing to see here
     .clear

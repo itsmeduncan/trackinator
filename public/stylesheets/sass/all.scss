@@ -4,6 +4,10 @@ body {
   line-height: 15px;
   color: #333333;
   
+  span {
+    font-style: italic;
+  }
+  
   h1 {
     font-family: Georgia, serif;
     font-size: 24px;
@@ -77,6 +81,32 @@ body {
   
   .graph {
     width: 90%;
+  }
+  
+  .form {
+    ul {
+      margin: 0 0 0 10px;
+      color: #cc0000;
+      padding: 10px;
+      li {
+        padding: 5px 0;
+      }
+    }
+    
+    .field {
+      margin: 0 0 10px 0;
+      label {
+        display: block;
+        width: 100px;
+        float: left;
+        text-align: right;
+        padding-right: 5px;
+        line-height: 23px;
+      }
+      input[type=submit] {
+        margin: 0 0 0 105px;
+      }
+    }
   }
  
  .footer {

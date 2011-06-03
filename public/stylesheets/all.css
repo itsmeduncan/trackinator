@@ -3,6 +3,8 @@ body {
   font-size: 13px;
   line-height: 15px;
   color: #333333; }
+  body span {
+    font-style: italic; }
   body h1 {
     font-family: Georgia, serif;
     font-size: 24px;
@@ -46,5 +48,22 @@ body {
     margin: 0 0 10px 0; }
   body .graph {
     width: 90%; }
+  body .form ul {
+    margin: 0 0 0 10px;
+    color: #cc0000;
+    padding: 10px; }
+    body .form ul li {
+      padding: 5px 0; }
+  body .form .field {
+    margin: 0 0 10px 0; }
+    body .form .field label {
+      display: block;
+      width: 100px;
+      float: left;
+      text-align: right;
+      padding-right: 5px;
+      line-height: 23px; }
+    body .form .field input[type=submit] {
+      margin: 0 0 0 105px; }
   body .footer {
     margin: 0 0 10px 10px; }

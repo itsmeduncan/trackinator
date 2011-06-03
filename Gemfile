@@ -12,6 +12,7 @@ gem 'sass'
 gem 'curb'
 gem 'nokogiri'
 gem 'hoptoad_notifier'
+gem 'jquery-rails', '>= 1.0.3'
 
 group :test, :development do
   gem "rspec-rails"

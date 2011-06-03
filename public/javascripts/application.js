@@ -3,7 +3,11 @@ $(document).ready(function() {
 		var $that = $(this);
 		var data = eval($that.attr('data'));
 		var name = $that.attr('name');
-
+		
+		if($('.chart', $that).length == 0) {
+			return true
+		}
+		
 		new Highcharts.Chart({
 			chart: {
 				renderTo: $('.chart', $that)[0],

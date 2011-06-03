@@ -1,23 +1,31 @@
 .navigation
   %ul
     %li= link_to 'Back', :back
-    %li
-      Download
-      = link_to 'CSV', download_path(:id => @victim.to_param, :format => "csv")
-      = link_to 'JSON', download_path(:id => @victim.to_param, :format => "json")
-      = link_to 'XML', download_path(:id => @victim.to_param, :format => "xml")
+    - if editable?
+      %li= link_to 'Edit', edit_victim_path(:id => @victim.to_param)
+      %li= link_to 'Delete', victim_path(:id => @victim.to_param), :method => :delete, :confirm => "Are you really sure?"
+    - if @victim.displayable?
+      %li
+        Download
+        = link_to 'CSV', download_path(:id => @victim.to_param, :format => "csv")
+        = link_to 'JSON', download_path(:id => @victim.to_param, :format => "json")
+        = link_to 'XML', download_path(:id => @victim.to_param, :format => "xml")
 
   %h2= @victim.name
 
   %table
     %tr
       %td Last visited
-      %td= @victim.last_visit.to_s
+      %td
+        - unless @victim.visited?
+          %span Unvisited
+        - else
+          = @victim.last_visit.to_s
     %tr
-      %td Visit interval
+      %td Visit Interval
       %td= @victim.interval
     %tr
-      %td URL
+      %td Victim URL
       %td= @victim.url
     %tr
       %td CSS Selector
@@ -29,22 +37,23 @@
       %td Failed Visits
       %td= @victim.unsuccessful_visits.count
 
-#tables
-  .table
-    %table
-      %tr
-        %th Date
-        %th Data
-
-      - @victim.successful_visits.each do |visit|
+- if @victim.displayable?
+  #tables
+    .table
+      %table
         %tr
-          %td= pretty_time visit.created_at
-          %td= visit.value.to_i
-  .clear
-  
-#graphs
-  .graph
-    .chart-container{ :data => data_array(@victim).to_json, :name => @victim.name }
-      .chart
+          %th Date
+          %th Data
 
-  .clear
+        - @victim.successful_visits.each do |visit|
+          %tr
+            %td= pretty_time visit.created_at
+            %td= visit.value.to_i
+    .clear
+  
+  #graphs
+    .graph
+      .chart-container{ :data => data_array(@victim).to_json, :name => @victim.name }
+        .chart
+
+    .clear

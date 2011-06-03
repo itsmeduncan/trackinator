@@ -44,6 +44,14 @@ class Victim < ActiveRecord::Base
     end
   end
   
+  def visited?
+    visits.present?
+  end
+  
+  def displayable?
+    visits.present? && successful_visits.present?
+  end
+  
   def visit!
     curl  = Curl::Easy.perform(url)
     html  = Nokogiri::HTML(curl.body_str)
