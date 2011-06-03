@@ -2,7 +2,7 @@
   - @victims.each_slice(3) do |victim_slice|
     - victim_slice.each do |victim|
       .table
-        %h2= link_to "#{victim.name}", victim_path(victim)
+        %h2= link_to "#{victim.name}", victim_path(victim.to_param)
         %table
           %tr
             %th Date
@@ -19,7 +19,7 @@
   - @victims.each_slice(2) do |victim_slice|
     - victim_slice.each do |victim|
       .graph
-        %h2= link_to "#{victim.name}", victim_path(victim)
+        %h2= link_to "#{victim.name}", victim_path(victim.to_param)
         .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
           .chart
 
