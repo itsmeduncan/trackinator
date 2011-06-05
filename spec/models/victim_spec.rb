@@ -32,6 +32,12 @@ describe Victim do
     end
   end
   
+  describe "downloadable?" do
+    it "should be false for the base class" do
+      Factory.build(:victim).should_not be_downloadable
+    end
+  end
+  
   describe "Victim#visitable" do
     it "should return only visitible Victims" do
       Factory(:victim, :last_visit => 3.hours.ago, :interval => 1.hour.to_i)

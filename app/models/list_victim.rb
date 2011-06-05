@@ -12,7 +12,12 @@ class ListVictim < Victim
       visit_list.update_attributes(:list => items)
     end
   end
-
+  
+  # TODO: Define what the data points available in the download are
+  def downloadable?
+    false
+  end
+  
   private
 
     def chart_data_value(visit)

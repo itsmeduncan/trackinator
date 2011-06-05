@@ -4,14 +4,15 @@
     - if editable?
       %li= link_to 'Edit', edit_victim_path(:id => @victim.to_param)
       %li= link_to 'Delete', victim_path(:id => @victim.to_param), :method => :delete, :confirm => "Are you really sure?"
-    - if @victim.displayable?
+
+    - if @victim.displayable? && @victim.downloadable?
       %li
         Download
         = link_to 'CSV', download_path(:id => @victim.to_param, :format => "csv")
         = link_to 'JSON', download_path(:id => @victim.to_param, :format => "json")
         = link_to 'XML', download_path(:id => @victim.to_param, :format => "xml")
 
-  %h2= "#{@victim.name} - #{@victim.type.to_s.titleize}"
+  %h2 #{@victim.name}
 
   %table
     %tr
@@ -21,6 +22,9 @@
           %span Unvisited
         - else
           = @victim.last_visit.to_s
+    %tr
+      %td Victim Type
+      %td #{@victim.type.to_s.titleize}
     %tr
       %td Visit Interval
       %td= @victim.interval

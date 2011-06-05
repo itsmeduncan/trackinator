@@ -4,7 +4,11 @@ class NumericVictim < Victim
       Visit.create :victim_id => id, :value => value.to_f, :status => status
     end
   end
-
+  
+  def downloadable?
+    true
+  end
+  
   private
 
     def chart_data_value(visit)

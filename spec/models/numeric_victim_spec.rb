@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe NumericVictim do
+  describe "#downloadable?" do
+    it "should be true for simple data points" do
+      Factory.build(:numeric_victim).should be_downloadable
+    end
+  end
+  
   describe "#visit!" do
     it "should create a Visit" do
       victim = Factory.build(:numeric_victim)

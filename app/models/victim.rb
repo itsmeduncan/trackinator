@@ -59,6 +59,10 @@ class Victim < ActiveRecord::Base
     visits.present?
   end
   
+  def downloadable?
+    false
+  end
+  
   def displayable?
     visits.present? && successful_visits.present?
   end

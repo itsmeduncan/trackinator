@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe ListVictim do
+  describe "#downloadable?" do
+    it "should be false till the API is implemented" do
+      Factory.build(:list_victim).should_not be_downloadable
+    end
+  end
+  
   describe "#visit!" do
     it "should create a Visit" do
       victim = Factory.build(:list_victim)
