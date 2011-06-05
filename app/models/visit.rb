@@ -8,4 +8,6 @@ class Visit < ActiveRecord::Base
   scope :successful, where(:status => 200)
   
   scope :unsuccessful, where("status != 200")
+
+  serialize :value
 end

@@ -9,15 +9,8 @@
       .table
         %h2= link_to "#{victim.name}", victim_path(victim.to_param)
         - if victim.displayable?
-          %table
-            %tr
-              %th Date
-              %th Data
-    
-            - victim.successful_visits.limit(Victim::VISIBLE_VISITS).each do |visit|
-              %tr
-                %td= pretty_time visit.created_at
-                %td= visit.value.to_i
+          = render :partial => "#{victim.class.name.underscore}_table", :locals => { :visits => victim.successful_visits }
+
         - else
           %span Nothing to see here
     .clear
@@ -28,7 +21,7 @@
       .graph
         %h2= link_to "#{victim.name}", victim_path(victim.to_param)
 
-        - if victim.displayable?
+        - if victim.displayable? && victim.is_a?(NumericVictim)
           .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
             .chart
         - else

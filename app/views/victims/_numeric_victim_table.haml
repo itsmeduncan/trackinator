@@ -1,0 +1,9 @@
+%table
+  %tr
+    %th Date
+    %th Data
+
+  - visits.each do |visit|
+    %tr
+      %td= pretty_time visit.created_at
+      %td= visit.value.to_i

@@ -1,0 +1,9 @@
+%table
+  - visits.each do |visit|
+    %tr
+      %th= pretty_time visits.first.created_at
+    %tr
+      %td
+        %ul
+        - visit.value.each do |item|
+          %li= item

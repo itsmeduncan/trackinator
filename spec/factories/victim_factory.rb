@@ -8,5 +8,5 @@ end
 Factory.define :numeric_victim, :class => NumericVictim, :parent => :victim do |v|
 end
 
-Factory.define :list_victim, :class => NumericVictim, :parent => :victim do |v|
+Factory.define :list_victim, :class => ListVictim, :parent => :victim do |v|
 end

@@ -38,22 +38,4 @@
       %td= @victim.unsuccessful_visits.count
 
 - if @victim.displayable?
-  #tables
-    .table
-      %table
-        %tr
-          %th Date
-          %th Data
-
-        - @victim.successful_visits.each do |visit|
-          %tr
-            %td= pretty_time visit.created_at
-            %td= visit.value.to_i
-    .clear
-  
-  #graphs
-    .graph
-      .chart-container{ :data => data_array(@victim).to_json, :name => @victim.name }
-        .chart
-
-    .clear
+  = render :partial => @victim.class.name.underscore, :locals => { :victim => @victim }

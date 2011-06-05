@@ -1,5 +1,6 @@
 class Victim < ActiveRecord::Base
   VALID_TYPES = [ 'NumericVictim', 'ListVictim' ]
+  VISIBLE_VISITS = 10
 
   validates_presence_of :name, :url, :selector, :interval, :last_visit, :slug
   validates_uniqueness_of :name
@@ -12,10 +13,8 @@ class Victim < ActiveRecord::Base
   
   default_scope order("name ASC")
   
-  VISIBLE_VISITS = 10
-  
   before_validation :slugify
-  
+
   class << self
     def visitable 
       all.select { |victim| Time.now > (victim.last_visit + victim.interval) }

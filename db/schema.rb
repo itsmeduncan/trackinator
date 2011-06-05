@@ -10,14 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110605015442) do
+ActiveRecord::Schema.define(:version => 20110605055729) do
 
   create_table "victims", :force => true do |t|
     t.string   "name",                                          :null => false
     t.string   "url",                                           :null => false
     t.string   "selector",                                      :null => false
     t.integer  "interval",   :default => 1800,                  :null => false
-    t.datetime "last_visit", :default => '2011-06-05 01:26:24'
+    t.datetime "last_visit", :default => '2011-06-05 20:20:04'
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
@@ -26,8 +26,15 @@ ActiveRecord::Schema.define(:version => 20110605015442) do
 
   add_index "victims", ["slug"], :name => "index_victims_on_slug", :unique => true
 
+  create_table "visit_lists", :force => true do |t|
+    t.integer  "victim_id"
+    t.text     "list",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "visits", :force => true do |t|
-    t.float    "value"
+    t.text     "value"
     t.integer  "status"
     t.integer  "victim_id"
     t.datetime "created_at"

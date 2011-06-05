@@ -1,0 +1,11 @@
+#tables
+  .table
+    = render :partial => 'numeric_victim_table', :locals => { :visits => victim.successful_visits }
+  .clear
+
+#graphs
+  .graph
+    .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
+      .chart
+
+  .clear
