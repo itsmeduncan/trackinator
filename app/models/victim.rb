@@ -70,8 +70,18 @@ class Victim < ActiveRecord::Base
   def to_param
     slug
   end
-  
+
+  def chart_data
+    successful_visits.collect do |visit|
+      [visit.created_at.to_i * 1000, chart_data_value(visit)]
+    end
+  end
+
   private
+  
+    def chart_data_value(visit)
+      raise NotImplementedError
+    end
   
     def slugify
       self.slug = self.name.to_s.downcase.gsub(/[^A-Z0-9]/i, '-')

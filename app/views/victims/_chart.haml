@@ -1,0 +1,10 @@
+- show_title ||= false
+.graph
+  %h2= link_to "#{victim.name}", victim_path(victim.to_param) if show_title
+
+  - if victim.displayable?
+    .chart-container{ :data => victim.chart_data.to_json, :name => victim.name }
+      .chart
+  - else
+    .chart-container
+      %span Nothing to see here

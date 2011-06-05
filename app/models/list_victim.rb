@@ -20,6 +20,10 @@ class ListVictim < Victim
 
   private
 
+    def chart_data_value(visit)
+      visit.value.count
+    end
+
     def from_selector html, selector
       html.css(selector).map { |obj| obj.inner_text }
     end

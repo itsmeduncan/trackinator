@@ -38,4 +38,4 @@
       %td= @victim.unsuccessful_visits.count
 
 - if @victim.displayable?
-  = render :partial => @victim.class.name.underscore, :locals => { :victim => @victim }
+  = render :partial => 'victim', :locals => { :victim => @victim }

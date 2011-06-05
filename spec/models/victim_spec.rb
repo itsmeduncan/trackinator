@@ -103,6 +103,31 @@ describe Victim do
     end
   end
   
+  describe "#chart_data" do
+    it "should only use the successuful visits" do
+      now = Time.now
+
+      victim = Factory(:victim)
+      successful_visit = Factory(:visit, :victim => victim, :created_at => now)
+      victim.visits = [
+        successful_visit,
+        Factory(:visit, :victim => victim, :status => 404)
+      ]
+
+      victim.should_receive(:chart_data_value).with(successful_visit).and_return(99)
+      victim.chart_data.should == [ [now.to_i * 1000, 99] ]
+    end
+
+    it "should raise a NotImplementedException" do
+      victim = Factory(:victim)
+      victim.visits = [ Factory(:visit, :victim => victim) ]
+
+      lambda {
+        victim.chart_data
+      }.should raise_exception NotImplementedError
+    end
+  end
+
   describe "before save" do
     it "should set the slug" do
       victim = Factory(:victim, :name => "Foo")

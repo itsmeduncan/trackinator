@@ -1,0 +1,8 @@
+#tables
+  .table
+    = render :partial => "#{victim.class.name.underscore}_table", :locals => { :visits => victim.successful_visits }
+  .clear
+
+#graphs
+  = render :partial => 'chart', :locals => { :victim => victim }
+  .clear

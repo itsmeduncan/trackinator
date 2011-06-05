@@ -18,13 +18,5 @@
 #graphs
   - @victims.each_slice(2) do |victim_slice|
     - victim_slice.each do |victim|
-      .graph
-        %h2= link_to "#{victim.name}", victim_path(victim.to_param)
-
-        - if victim.displayable? && victim.is_a?(NumericVictim)
-          .chart-container{ :data => data_array(victim).to_json, :name => victim.name }
-            .chart
-        - else
-          .chart-container
-            %span Nothing to see here
+      = render :partial => 'chart', :locals => { :victim => victim, :show_title => true }
     .clear

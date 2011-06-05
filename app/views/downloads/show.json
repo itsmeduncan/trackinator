@@ -3,7 +3,7 @@
   <% @victim.successful_visits.each do |visit| %>
     {
       "date" : "<%= visit.created_at %>",
-      "value" : <%= visit.value.to_i %>
+      "value" : <%= visit.value %>
     }<%= @victim.visits.last != visit ? "," : "" %>
   <% end %> 
   ]

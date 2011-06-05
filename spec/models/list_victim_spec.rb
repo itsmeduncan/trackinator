@@ -36,4 +36,19 @@ describe ListVictim do
       }.should change(victim.visit_list, :list).from([]).to( ['foo', 'bar'] )
     end
   end
+
+  describe "#chart_data" do
+    it "should return a tuple of (date, number of values in list) for charting" do
+      now = Time.now
+      yesterday = now - 1.day
+
+      victim = Factory(:list_victim)
+      victim.visits = [
+        Factory(:visit, :victim => victim, :value => ['one', 'two', 'three'], :created_at => yesterday),
+        Factory(:visit, :victim => victim, :value => ['four', 'five'], :created_at => now)
+      ]
+
+      victim.chart_data.should == [ [now.to_i * 1000, 2], [yesterday.to_i * 1000, 3] ]
+    end
+  end
 end

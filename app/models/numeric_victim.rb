@@ -10,4 +10,10 @@ class NumericVictim < Victim
   ensure
     update_attribute(:last_visit, Time.now)
   end
+
+  private
+
+    def chart_data_value(visit)
+      visit.value
+    end
 end
