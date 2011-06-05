@@ -6,16 +6,20 @@ describe Victim do
       Factory(:victim).should be_valid
       Factory.build(:victim).should be_valid
     end
-    
+
     it "should validate the uniqueness of name" do
       Factory(:victim, :name => "foo")
       Factory.build(:victim, :name => "foo").should_not be_valid
     end
-    
+
     [:name, :url, :selector, :interval, :last_visit].each do |attr|
       it "should validate the presence of #{attr}" do
         Factory.build(:victim, attr => nil).should_not be_valid
       end
+    end
+
+    it "should validate the type is allowed" do
+      Factory.build(:victim, :victim_type => 'Foo').should_not be_valid
     end
   end
   
@@ -71,22 +75,24 @@ describe Victim do
       }.should_not change(Victim, :count).from(1).to(0)
     end
   end
-  
-  describe "#visit!" do
-    it "should create a Visit" do
-      victim = Factory.build(:victim)
-      
-      Curl::Easy.should_receive(:perform).with(victim.url).and_return(mock(:body_str => "", :response_code => 200))
 
-      victim.visit!
+  describe "#victim_type=" do
+    it "should set the type properly" do
+      Factory.build(:victim, :victim_type => 'FooType').type.should == 'FooType'
     end
+  end
 
-    it "should always update #last_visit" do
-      victim = Factory(:victim)
-      Curl::Easy.should_receive(:perform).with(victim.url).and_return(mock(:body_str => "", :response_code => 200))
+  describe "#victim_type" do
+    it "should return the correct type" do
+      Factory.build(:numeric_victim, :victim_type => 'FooType').victim_type.should == 'FooType'
+    end
+  end
+
+  describe "#visit!" do
+    it "should raise a NotImplementedError" do
       lambda {
-        victim.visit!
-      }.should change(victim, :last_visit)
+        Factory.build(:victim).visit!
+      }.should raise_exception NotImplementedError
     end
   end
   

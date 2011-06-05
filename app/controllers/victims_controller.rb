@@ -23,7 +23,7 @@ class VictimsController < ApplicationController
   end
   
   def edit
-    @victim = Victim.find_by_slug(params[:id])
+    @victim = Victim.find_by_slug(params[:id]).becomes(Victim)
   end
   
   def update

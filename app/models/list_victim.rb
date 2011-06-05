@@ -1,0 +1,2 @@
+class ListVictim < Victim
+end

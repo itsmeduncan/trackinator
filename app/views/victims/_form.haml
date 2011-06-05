@@ -1,19 +1,24 @@
 .field
-  = victim.label :name, "Victim Name"
-  = victim.text_field :name
+  = form.label :name, "Victim Name"
+  = form.text_field :name
   .clear
   
 .field
-  = victim.label :url, "Victim URL"
-  = victim.text_field :url
+  = form.label :url, "Victim URL"
+  = form.text_field :url
   .clear
   
 .field
-  = victim.label :selector, "CSS Selector"
-  = victim.text_field :selector
+  = form.label :selector, "CSS Selector"
+  = form.text_field :selector
   .clear
   
 .field
-  = victim.label :interval, "Visit Interval"
-  = victim.text_field :interval
+  = form.label :interval, "Visit Interval"
+  = form.text_field :interval
+  .clear
+
+.field
+  = form.label :victim_type, "Victim Type"
+  = form.select :victim_type, options_for_select(victim_types, victim.type)
   .clear

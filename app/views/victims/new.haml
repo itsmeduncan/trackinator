@@ -11,9 +11,9 @@
         %li= error_message
   
   
-  - form_for @victim do |victim|
-    = render :partial => "form", :locals => { :victim => victim }
+  - form_for @victim do |form|
+    = render :partial => "form", :locals => { :form => form, :victim => @victim }
     
     .field
-      = victim.submit
+      = form.submit
       .clear

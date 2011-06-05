@@ -1,6 +1,9 @@
 class Victim < ActiveRecord::Base
+  VALID_TYPES = [ 'NumericVictim', 'ListVictim' ]
+
   validates_presence_of :name, :url, :selector, :interval, :last_visit, :slug
   validates_uniqueness_of :name
+  validates_inclusion_of :victim_type, :in => VALID_TYPES
   
   has_many :visits, :dependent => :destroy
   
@@ -19,7 +22,8 @@ class Victim < ActiveRecord::Base
     end
     
     def create_from_arguments arguments
-      victim = Victim.new(:name => arguments[:name], :url => arguments[:url], :selector => arguments[:selector])
+      valid_arguments = [:name, :url, :selector, :victim_type]
+      victim = Victim.new( arguments.slice(*valid_arguments) )
       if victim.save
         Rails.logger.info "Saved #{victim.name}!"
       else
@@ -31,7 +35,7 @@ class Victim < ActiveRecord::Base
     end
     
     def destroy_from_arguments arguments
-      victim = Victim.where(:name => arguments[:name]).limit(1).first
+      victim = Victim.where(:name => arguments[:name]).first
       if victim 
         if victim.destroy
         Rails.logger.info "Destroyed #{victim.name}"
@@ -43,7 +47,15 @@ class Victim < ActiveRecord::Base
       end
     end
   end
-  
+
+  def victim_type=(value)
+    self[:type] = value
+  end
+
+  def victim_type
+    self[:type]
+  end
+
   def visited?
     visits.present?
   end
@@ -51,19 +63,11 @@ class Victim < ActiveRecord::Base
   def displayable?
     visits.present? && successful_visits.present?
   end
-  
+
   def visit!
-    curl  = Curl::Easy.perform(url)
-    html  = Nokogiri::HTML(curl.body_str)
-    value = from_selector(html, selector)
-    
-    status = value.blank? ? 404 : curl.response_code
-    
-    Visit.create :victim_id => id, :value => value.to_f, :status => status
-  ensure
-    update_attribute(:last_visit, Time.now)
+    raise NotImplementedError
   end
-  
+
   def to_param
     slug
   end

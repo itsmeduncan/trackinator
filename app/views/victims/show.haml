@@ -11,7 +11,7 @@
         = link_to 'JSON', download_path(:id => @victim.to_param, :format => "json")
         = link_to 'XML', download_path(:id => @victim.to_param, :format => "xml")
 
-  %h2= @victim.name
+  %h2= "#{@victim.name} - #{@victim.type.to_s.titleize}"
 
   %table
     %tr
