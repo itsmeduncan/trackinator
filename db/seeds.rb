@@ -7,5 +7,5 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 
-Victim.create(:name => 'Github People', :url => "https://github.com", :selector => '.hero h1 strong:eq(1)')
-Victim.create(:name => 'Github Repos', :url => "https://github.com", :selector => '.hero h1 strong:eq(2)')
+NumericVictim.create(:name => 'Github People', :url => 'https://github.com', :selector => '.hero h1 strong:eq(1)')
+ListVictim.create(:name => 'True Blood Episodes', :url => 'http://www.tv.com/true-blood/show/74645/episode.html?tag=page_nav;episode', :selector => '#episode_guide_list ul li h3 a')
