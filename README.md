@@ -15,6 +15,11 @@ http://travis-ci.org/#!/itsmeduncan/trackinator
 * ???
 * Profit
 
+### Explination
+
+There are two types of victims: `Numeric` and `List`. Each one visits in the same way
+however they are displayed differently.
+
 ### License
 
 Copyright (C) 2011 by Duncan Grazier
