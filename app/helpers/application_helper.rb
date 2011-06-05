@@ -4,6 +4,7 @@ module ApplicationHelper
     datetime.strftime("%D %R")
   end
   
+  # TODO: How to manage this?
   def editable?
     ["development", "test"].include?(Rails.env)
   end
