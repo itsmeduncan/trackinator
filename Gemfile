@@ -9,6 +9,7 @@ gem 'curb', '0.7.15'
 gem 'nokogiri', '1.4.4'
 gem 'hoptoad_notifier', '2.4.11'
 gem 'jquery-rails', '>= 1.0.3'
+gem 'heroku', '~> 2.2.4'
 
 group :test, :development do
   gem 'sqlite3', '1.3.3'
