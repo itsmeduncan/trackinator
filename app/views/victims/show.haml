@@ -25,9 +25,11 @@
     %tr
       %td Victim Type
       %td #{@victim.type.to_s.titleize}
-    %tr
-      %td Visit Interval
-      %td= @victim.interval
+    / TODO: Interval is set to 24 hours because Heroku charges for anything faster
+    / then that.
+    / %tr
+    /   %td Visit Interval
+    /   %td= @victim.interval
     %tr
       %td Victim URL
       %td= @victim.url

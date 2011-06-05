@@ -12,11 +12,13 @@
   = form.label :selector, "CSS Selector"
   = form.text_field :selector
   .clear
-  
-.field
-  = form.label :interval, "Visit Interval"
-  = form.text_field :interval
-  .clear
+
+/ TODO: Interval is set to 24 hours because Heroku charges for anything faster
+/ then that.  
+/ .field
+/   = form.label :interval, "Visit Interval"
+/   = form.text_field :interval
+/   .clear
 
 .field
   = form.label :victim_type, "Victim Type"
