@@ -1,19 +1,18 @@
 class NumericVictim < Victim
   def visit!
-    curl  = Curl::Easy.perform(url)
-    html  = Nokogiri::HTML(curl.body_str)
-    value = from_selector(html, selector)
-
-    status = value.blank? ? 404 : curl.response_code
-
-    Visit.create :victim_id => id, :value => value.to_f, :status => status
-  ensure
-    update_attribute(:last_visit, Time.now)
+    stalk! do |status, value|
+      Visit.create :victim_id => id, :value => value.to_f, :status => status
+    end
   end
 
   private
 
     def chart_data_value(visit)
       visit.value
+    end
+
+    # Override the basic selector
+    def from_selector html, selector
+      super.first.try(:gsub, /[^0-9]/, '')
     end
 end

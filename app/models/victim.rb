@@ -78,7 +78,19 @@ class Victim < ActiveRecord::Base
   end
 
   private
-  
+
+    def stalk! &block
+      curl  = Curl::Easy.perform(url)
+      html  = Nokogiri::HTML(curl.body_str)
+      value = from_selector(html, selector)
+
+      status = value.blank? ? 404 : curl.response_code
+
+      yield(status, value)
+    ensure
+      update_attribute(:last_visit, Time.now)
+    end
+
     def chart_data_value(visit)
       raise NotImplementedError
     end
@@ -86,9 +98,9 @@ class Victim < ActiveRecord::Base
     def slugify
       self.slug = self.name.to_s.downcase.gsub(/[^A-Z0-9]/i, '-')
     end
-  
+
     def from_selector html, selector
-      html.css(selector).inner_text.gsub(/[^0-9]/,'')
+      html.css(selector).map { |obj| obj.inner_text }
     end
 
 end
