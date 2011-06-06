@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.timestamps
       
-      t.integer :admin, :boolean, :default => false
+      t.integer :admin, :boolean, :default => 0
     end
 
     add_index :users, :email,                :unique => true
