@@ -1,5 +1,5 @@
 class ListVictim < Victim
-  has_one :visit_list, :foreign_key => 'victim_id'
+  has_one :visit_list, :foreign_key => 'victim_id', :dependent => :destroy
 
   def visit!
     stalk! do |status, items|
