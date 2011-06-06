@@ -3,12 +3,14 @@ body {
   font-size: 13px;
   line-height: 15px;
   color: #333333; }
+  body .container {
+    margin: 0 0 0 10px; }
   body span {
     font-style: italic; }
   body h1 {
     font-family: Georgia, serif;
     font-size: 24px;
-    margin: 15px 0 15px 10px; }
+    margin: 15px 0; }
   body h2 {
     font-family: Georgia, serif;
     font-size: 16px;
@@ -23,7 +25,7 @@ body {
     line-height: 1px;
     clear: both; }
   body .navigation {
-    margin: 0 0 10px 10px; }
+    margin: 0 0 10px 0; }
     body .navigation table {
       border: 1px solid #ccc;
       margin: 0 0 10px 0; }
@@ -33,7 +35,7 @@ body {
       display: inline;
       margin: 0 10px 0 0; }
   body .dashboard {
-    margin: 20px 10px; }
+    margin: 20px 0; }
     body .dashboard ul {
       margin: 0 0 20px 0; }
       body .dashboard ul li {
@@ -47,7 +49,7 @@ body {
   body #graphs, body #tables {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px; }
+    margin: 10px 10px 10px 0; }
     body #graphs table tr th, body #tables table tr th {
       text-align: left;
       font-weight: bold;
@@ -61,7 +63,6 @@ body {
   body .graph {
     width: 90%; }
   body .form ul {
-    margin: 0 0 0 10px;
     color: #cc0000;
     padding: 10px; }
     body .form ul li {
@@ -78,4 +79,5 @@ body {
     body .form .field input[type=submit] {
       margin: 0 0 0 105px; }
   body .footer {
-    margin: 0 0 10px 10px; }
+    position: absolute;
+    bottom: 20px; }

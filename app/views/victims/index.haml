@@ -1,21 +1,33 @@
-- if editable?
-  .navigation
-    %ul
+.navigation
+  %ul
+    - if user_signed_in?
+      %li= link_to 'Sign Out', destroy_user_session_path
       %li= link_to 'New Victim', new_victim_path
+    - else
+      %li= link_to 'Sign In', new_user_session_path
+      %li= link_to 'Sign Up', new_user_registration_path
 
 .dashboard
-  %h2 Victims
-  %ul
-    - @victims.each do |victim|
-      %li= link_to victim.name, victim_path(victim.to_param)
-
-  %h2 Recent Visits
-  %table
-    %tr
-      %th Victim Name
-      %th Visited Timestamp
-
-    - @recent_visits.each do |visit|
+  - unless @my_victims.empty?
+    %h2 My Victims
+    %ul
+      - @my_victims.each do |victim|
+        %li= link_to victim.name, victim_path(victim.to_param)
+  
+  - unless @recent_victims.empty?
+    %h2 Recent Victims
+    %ul
+      - @recent_victims.each do |victim|
+        %li= link_to victim.name, victim_path(victim.to_param)
+  
+  - unless @recent_visits.empty?
+    %h2 Recent Visits
+    %table
       %tr
-        %td= link_to visit.victim.name, victim_path(visit.victim.to_param)
-        %td= pretty_time visit.created_at
+        %th Victim Name
+        %th Visited Timestamp
+
+      - @recent_visits.each do |visit|
+        %tr
+          %td= link_to visit.victim.name, victim_path(visit.victim.to_param)
+          %td= pretty_time visit.created_at

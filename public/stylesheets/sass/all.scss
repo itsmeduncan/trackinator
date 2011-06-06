@@ -4,6 +4,10 @@ body {
   line-height: 15px;
   color: #333333;
   
+  .container {
+    margin: 0 0 0 10px;
+  }
+  
   span {
     font-style: italic;
   }
@@ -11,7 +15,7 @@ body {
   h1 {
     font-family: Georgia, serif;
     font-size: 24px;
-    margin: 15px 0 15px 10px;
+    margin: 15px 0;
   }
   
   h2 {
@@ -36,7 +40,7 @@ body {
   }
 
   .navigation {
-    margin: 0 0 10px 10px;
+    margin: 0 0 10px 0;
     table {
       border: 1px solid #ccc;
       margin: 0 0 10px 0;
@@ -55,7 +59,7 @@ body {
   }
   
   .dashboard {
-    margin: 20px 10px;
+    margin: 20px 0;
     ul {
       margin: 0 0 20px 0;
       li {
@@ -80,7 +84,7 @@ body {
   #graphs, #tables {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 10px 10px 0;
     
     table {
       tr {
@@ -108,7 +112,6 @@ body {
   
   .form {
     ul {
-      margin: 0 0 0 10px;
       color: #cc0000;
       padding: 10px;
       li {
@@ -133,6 +136,7 @@ body {
   }
  
  .footer {
-    margin: 0 0 10px 10px;
+    position: absolute;
+    bottom: 20px;
  }
 }

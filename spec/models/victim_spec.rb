@@ -22,16 +22,7 @@ describe Victim do
       Factory.build(:victim, :victim_type => 'Foo').should_not be_valid
     end
   end
-  
-  describe "#default_scope" do
-    it "should return Victims in name ASC order" do
-      Factory(:victim, :name => 'foo')
-      Factory(:victim, :name => 'bar')
-      
-      Victim.all.collect(&:name).should == ["bar", "foo"]
-    end
-  end
-  
+
   describe "downloadable?" do
     it "should be false for the base class" do
       Factory.build(:victim).should_not be_downloadable
@@ -138,6 +129,23 @@ describe Victim do
     it "should set the slug" do
       victim = Factory(:victim, :name => "Foo")
       victim.slug.should == "foo"
+    end
+  end
+  
+  describe "#editable_by" do
+    it "should be true if the user created the Victim" do
+      victim = Factory.build(:victim, :user_id => 20_000)
+      victim.editable_by(mock(User, :id => 20_000)).should be_true
+    end
+    
+    it "should be false if the user doesn't own the Victim" do
+      victim = Factory.build(:victim, :user_id => 1)
+      victim.editable_by(mock(User, :id => 20_000)).should be_false
+    end
+    
+    it "should be false if there is no user passed in" do
+      victim = Factory.build(:victim, :user_id => 1)
+      victim.editable_by(nil).should be_false
     end
   end
 end

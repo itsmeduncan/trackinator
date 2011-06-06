@@ -11,7 +11,7 @@ class Victim < ActiveRecord::Base
   has_many :successful_visits, :class_name => "Visit", :dependent => :destroy, :conditions => ['status = 200']
   has_many :unsuccessful_visits, :class_name => "Visit", :dependent => :destroy, :conditions => ['status != 200']
   
-  default_scope order("name ASC")
+  belongs_to :user
   
   before_validation :slugify
 
@@ -79,6 +79,10 @@ class Victim < ActiveRecord::Base
     successful_visits.collect do |visit|
       [visit.created_at.to_i * 1000, chart_data_value(visit)]
     end
+  end
+  
+  def editable_by user
+    user.nil? ? false : (user_id == user.id)
   end
 
   private

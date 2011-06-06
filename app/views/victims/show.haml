@@ -1,7 +1,7 @@
 .navigation
   %ul
     %li= link_to 'Back', :back
-    - if editable?
+    - if @victim.editable_by(current_user)
       %li= link_to 'Edit', edit_victim_path(:id => @victim.to_param)
       %li= link_to 'Delete', victim_path(:id => @victim.to_param), :method => :delete, :confirm => "Are you really sure?"
 
