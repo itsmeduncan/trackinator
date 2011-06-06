@@ -32,6 +32,20 @@ body {
     body .navigation ul li {
       display: inline;
       margin: 0 10px 0 0; }
+  body .dashboard {
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #ccc; }
+    body .dashboard ul {
+      margin: 0 0 20px 0; }
+      body .dashboard ul li {
+        margin: 5px 0; }
+    body .dashboard table tr th {
+      text-align: left;
+      font-weight: bold;
+      padding: 0 0 5px 0; }
+    body .dashboard table tr td {
+      padding: 0 20px 5px 0; }
   body #graphs, body #tables {
     border: 1px solid #ccc;
     padding: 10px;

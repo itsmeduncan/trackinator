@@ -12,6 +12,12 @@ describe VictimsController do
       Victim.should_receive(:all).with(:include=>[:visits, :unsuccessful_visits, :successful_visits]).once.and_return([])
       get :index
     end
+    
+    it "should get the recent visits" do
+      Factory(:visit)
+      get :index
+      assigns(:recent_visits).should_not be_empty
+    end
   end
 
   describe "#show" do

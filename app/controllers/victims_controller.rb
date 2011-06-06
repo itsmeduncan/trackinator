@@ -3,6 +3,7 @@ class VictimsController < ApplicationController
   
   def index
     @victims = Victim.all(:include => [:visits, :unsuccessful_visits, :successful_visits])
+    @recent_visits = Visit.successful.limit(5).order(:created_at).all(:include => :victim)
   end
   
   def show

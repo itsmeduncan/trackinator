@@ -3,20 +3,19 @@
     %ul
       %li= link_to 'New Victim', new_victim_path
 
-#tables
-  - @victims.each_slice(3) do |victim_slice|
-    - victim_slice.each do |victim|
-      .table
-        %h2= link_to "#{victim.name}", victim_path(victim.to_param)
-        - if victim.displayable?
-          = render :partial => "#{victim.class.name.underscore}_table", :locals => { :visits => victim.successful_visits }
+.dashboard
+  %h2 Victims
+  %ul
+    - @victims.each do |victim|
+      %li= link_to victim.name, victim_path(victim.to_param)
 
-        - else
-          %span Nothing to see here
-    .clear
+  %h2 Recent Visits
+  %table
+    %tr
+      %th Victim Name
+      %th Visited Timestamp
 
-#graphs
-  - @victims.each_slice(2) do |victim_slice|
-    - victim_slice.each do |victim|
-      = render :partial => 'chart', :locals => { :victim => victim, :show_title => true }
-    .clear
+    - @recent_visits.each do |visit|
+      %tr
+        %td= link_to visit.victim.name, victim_path(visit.victim.to_param)
+        %td= pretty_time visit.created_at

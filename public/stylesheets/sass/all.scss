@@ -53,7 +53,32 @@ body {
       }
     }
   }
-
+  
+  .dashboard {
+    margin: 20px 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    ul {
+      margin: 0 0 20px 0;
+      li {
+        margin: 5px 0;
+      }
+    }
+    
+    table {
+      tr {
+        th {
+          text-align: left;
+          font-weight: bold;
+          padding: 0 0 5px 0;
+        }
+        td {
+          padding: 0 20px 5px 0;
+        }
+      }
+    }
+  }
+  
   #graphs, #tables {
     border: 1px solid #ccc;
     padding: 10px;
