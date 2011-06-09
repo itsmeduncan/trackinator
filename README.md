@@ -4,7 +4,8 @@
 
 http://trackinator.heroku.com/
 
-### Watch it build
+### Watch it build [![Build Status](http://travis-ci.org/itsmeduncan/trackinator.png)](http://travis-ci.org/itsmeduncan/trackinator)
+
 
 http://travis-ci.org/#!/itsmeduncan/trackinator
 
