@@ -23,7 +23,7 @@ however they are displayed differently.
 
 ### License
 
-Copyright (C) 2011 by Duncan Grazier
+Copyright (C) 2011 by Impossible Rocket, Inc
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
