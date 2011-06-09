@@ -148,4 +148,26 @@ describe Victim do
       victim.editable_by(nil).should be_false
     end
   end
+
+  describe "before_update clear visits" do
+    it "should delete all visits if the selector is changed" do
+      victim = Factory(:victim, :name => "Foo")
+      Factory(:visit, :victim => victim)
+
+      lambda {
+        victim.selector = "foo"
+        victim.save
+      }.should change(Visit, :count).from(1).to(0)
+    end
+
+    it "should not delete visits if the selector hasn't changed" do
+      victim = Factory(:victim, :name => "Foo")
+      Factory(:visit, :victim => victim)
+
+      lambda {
+        victim.name = "foo"
+        victim.save
+      }.should_not change(Visit, :count).from(1).to(0)
+    end
+  end
 end

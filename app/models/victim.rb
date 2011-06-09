@@ -15,6 +15,8 @@ class Victim < ActiveRecord::Base
   
   before_validation :slugify
 
+  before_update :destroy_visits_if_selector_changed
+
   class << self
     def visitable 
       all.select { |victim| Time.now > (victim.last_visit + victim.interval) }
@@ -109,6 +111,10 @@ class Victim < ActiveRecord::Base
 
     def from_selector html, selector
       html.css(selector).map { |obj| obj.inner_text }
+    end
+
+    def destroy_visits_if_selector_changed
+      visits.destroy_all if selector_changed?
     end
 
 end

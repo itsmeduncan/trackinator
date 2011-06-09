@@ -14,5 +14,5 @@
     = render :partial => "form", :locals => { :form => form, :victim => @victim }
     
     .field
-      = form.submit
+      = form.submit nil, :confirm => "Are you sure? If you updated the CSS Selector, all visits will be lost"
       .clear
