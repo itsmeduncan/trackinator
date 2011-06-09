@@ -9,7 +9,7 @@ class VictimsController < ApplicationController
   end
   
   def show
-    @victim = Victim.find_by_slug!(params[:id], :include => [:visits, :unsuccessful_visits, :successful_visits])
+    @victim = Victim.find(params[:id], :include => [:visits, :unsuccessful_visits, :successful_visits])
   end
   
   def new
@@ -21,14 +21,14 @@ class VictimsController < ApplicationController
     @victim.user_id = current_user.id
     
     if @victim.save
-      redirect_to victim_path(@victim.to_param)
+      redirect_to victim_path(@victim)
     else
       render :new
     end
   end
   
   def edit
-    @victim = Victim.find_by_slug!(params[:id]).becomes(Victim)
+    @victim = Victim.find(params[:id]).becomes(Victim)
     
     unless @victim.editable_by(current_user)
       flash[:notice] = "You don't have the permissions to do that"
@@ -37,14 +37,14 @@ class VictimsController < ApplicationController
   end
   
   def update
-    @victim = Victim.find_by_slug!(params[:id])
+    @victim = Victim.find(params[:id])
     
     unless @victim.editable_by(current_user)
       flash[:notice] = "You don't have the permissions to do that"
       redirect_to root_path and return
     else
       if @victim.update_attributes(params[:victim])
-        redirect_to victim_path(@victim.to_param)
+        redirect_to victim_path(@victim)
       else
         render :edit
       end
@@ -52,7 +52,7 @@ class VictimsController < ApplicationController
   end
   
   def destroy
-    @victim = Victim.find_by_slug!(params[:id])
+    @victim = Victim.find(params[:id])
     
     unless @victim.editable_by(current_user)
       flash[:notice] = "You don't have the permissions to do that"

@@ -34,9 +34,9 @@ describe VictimsController do
   describe "#show" do
     it "should find the Victim" do
       victim = Factory(:victim)
-      Victim.should_receive(:find_by_slug!).with(victim.slug, :include=>[:visits, :unsuccessful_visits, :successful_visits]).and_return(victim)
+      Victim.should_receive(:find).with(victim.id, :include=>[:visits, :unsuccessful_visits, :successful_visits]).and_return(victim)
       
-      get :show, :id => victim.slug
+      get :show, :id => victim.id
       
       assigns(:victim).should == victim
       response.should be_success
@@ -93,7 +93,7 @@ describe VictimsController do
     
     it "should find the Victim to edit" do
       victim = Factory(:victim, :user => @user)
-      get :edit, :id => victim.to_param
+      get :edit, :id => victim.id
       response.should be_success
     end
   end
@@ -107,7 +107,7 @@ describe VictimsController do
     it "should update the Victim and redirect" do
       victim = Factory(:victim, :user => @user)
       lambda {
-        put :update, :id => victim.to_param, :victim => { :url => "foo" }
+        put :update, :id => victim.id, :victim => { :url => "foo" }
         victim.reload
       }.should change(victim, :url)
       response.should be_redirect
@@ -116,7 +116,7 @@ describe VictimsController do
     it "should not update the Victim and render" do
       victim = Factory(:victim, :user => @user)
       lambda {
-        put :update, :id => victim.to_param, :victim => { :url => "" }
+        put :update, :id => victim.id, :victim => { :url => "" }
         victim.reload
       }.should_not change(victim, :url)
       response.should render_template(:edit)
@@ -125,7 +125,7 @@ describe VictimsController do
     it "should not update the Victim if you don't own it" do
       victim = Factory(:victim)
       lambda {
-        put :update, :id => victim.to_param, :victim => { :url => "foo" }
+        put :update, :id => victim.id, :victim => { :url => "foo" }
         victim.reload
       }.should_not change(victim, :url)
       response.should be_redirect
@@ -141,7 +141,7 @@ describe VictimsController do
     it "should destroy the Victim" do
       victim = Factory(:victim, :user => @user)
       lambda {
-        delete :destroy, :id => victim.to_param
+        delete :destroy, :id => victim.id
       }.should change(Victim, :count).from(1).to(0)
       response.should be_redirect
     end
@@ -149,7 +149,7 @@ describe VictimsController do
     it "should redirect if you don't own the victim" do
       victim = Factory(:victim)
       lambda {
-        delete :destroy, :id => victim.to_param
+        delete :destroy, :id => victim.id
       }.should_not change(Victim, :count).from(1).to(0)
       response.should be_redirect
     end

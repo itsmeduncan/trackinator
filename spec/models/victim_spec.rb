@@ -92,14 +92,7 @@ describe Victim do
       }.should raise_exception NotImplementedError
     end
   end
-  
-  describe "#to_param" do
-    it "should use the slug" do
-      victim = Factory.build(:victim, :slug => "foo-bar")
-      victim.to_param.should == "foo-bar"
-    end
-  end
-  
+
   describe "#chart_data" do
     it "should only use the successuful visits" do
       now = Time.now
@@ -125,13 +118,6 @@ describe Victim do
     end
   end
 
-  describe "before save" do
-    it "should set the slug" do
-      victim = Factory(:victim, :name => "Foo")
-      victim.slug.should == "foo"
-    end
-  end
-  
   describe "#editable_by" do
     it "should be true if the user created the Victim" do
       victim = Factory.build(:victim, :user_id => 20_000)

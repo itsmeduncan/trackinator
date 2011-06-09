@@ -2,18 +2,16 @@ class Victim < ActiveRecord::Base
   VALID_TYPES = [ 'NumericVictim', 'ListVictim' ]
   VISIBLE_VISITS = 10
 
-  validates_presence_of :name, :url, :selector, :interval, :last_visit, :slug
+  validates_presence_of :name, :url, :selector, :interval, :last_visit
   validates_uniqueness_of :name
   validates_inclusion_of :victim_type, :in => VALID_TYPES
-  
+
   has_many :visits, :dependent => :destroy
-  
+
   has_many :successful_visits, :class_name => "Visit", :dependent => :destroy, :conditions => ['status = 200']
   has_many :unsuccessful_visits, :class_name => "Visit", :dependent => :destroy, :conditions => ['status != 200']
-  
+
   belongs_to :user
-  
-  before_validation :slugify
 
   before_update :destroy_visits_if_selector_changed
 
@@ -73,10 +71,6 @@ class Victim < ActiveRecord::Base
     raise NotImplementedError
   end
 
-  def to_param
-    slug
-  end
-
   def chart_data
     successful_visits.collect do |visit|
       [visit.created_at.to_i * 1000, chart_data_value(visit)]
@@ -103,10 +97,6 @@ class Victim < ActiveRecord::Base
 
     def chart_data_value(visit)
       raise NotImplementedError
-    end
-  
-    def slugify
-      self.slug = self.name.to_s.downcase.gsub(/[^A-Z0-9]/i, '-')
     end
 
     def from_selector html, selector
