@@ -16,3 +16,6 @@
     .field
       = form.submit nil, :confirm => "Are you sure? If you updated the CSS Selector, all visits will be lost"
       .clear
+    
+    .field
+      = link_to 'Reset Data', victim_visits_path(@victim), :method => :delete, :confirm => "Are you sure? All data will be lost!"
