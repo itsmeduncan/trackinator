@@ -1,13 +1,8 @@
-## Trackinator
+## Trackinator [![Build Status](http://travis-ci.org/itsmeduncan/trackinator.png)](http://travis-ci.org/itsmeduncan/trackinator)
 
 ### See it
 
-http://trackinator.heroku.com/
-
-### Watch it build [![Build Status](http://travis-ci.org/itsmeduncan/trackinator.png)](http://travis-ci.org/itsmeduncan/trackinator)
-
-
-http://travis-ci.org/#!/itsmeduncan/trackinator
+[Trackinator on Heroku](http://trackinator.heroku.com/)
 
 ### How-to
 
@@ -15,11 +10,6 @@ http://travis-ci.org/#!/itsmeduncan/trackinator
 * rake visit:visitable
 * ???
 * Profit
-
-### Explination
-
-There are two types of victims: `Numeric` and `List`. Each one visits in the same way
-however they are displayed differently.
 
 ### License
 
