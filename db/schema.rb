@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110606005724) do
+ActiveRecord::Schema.define(:version => 20110609003045) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20110606005724) do
     t.string   "name",                                          :null => false
     t.string   "url",                                           :null => false
     t.string   "selector",                                      :null => false
-    t.integer  "interval",   :default => 3600,                  :null => false
+    t.integer  "interval",   :default => 86400,                 :null => false
     t.datetime "last_visit", :default => '2011-05-24 01:04:32'
     t.datetime "created_at"
     t.datetime "updated_at"
