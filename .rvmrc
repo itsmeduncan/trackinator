@@ -1,1 +1,1 @@
-rvm ruby-1.9.2@trackinator --create
+rvm ruby-1.9.2-p290@trackinator --create
