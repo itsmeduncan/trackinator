@@ -16,10 +16,10 @@ class Victim < ActiveRecord::Base
   before_update :destroy_visits_if_selector_changed
 
   class << self
-    def visitable 
+    def visitable
       all.select { |victim| Time.now > (victim.last_visit + victim.interval) }
     end
-    
+
     def create_from_arguments arguments
       valid_arguments = [:name, :url, :selector, :victim_type]
       victim = Victim.new( arguments.slice(*valid_arguments) )
@@ -32,7 +32,7 @@ class Victim < ActiveRecord::Base
         end
       end
     end
-    
+
     def destroy_from_arguments arguments
       victim = Victim.where(:name => arguments[:name]).first
       if victim 
@@ -58,11 +58,11 @@ class Victim < ActiveRecord::Base
   def visited?
     visits.present?
   end
-  
+
   def downloadable?
     false
   end
-  
+
   def displayable?
     visits.present? && successful_visits.present?
   end
@@ -76,7 +76,7 @@ class Victim < ActiveRecord::Base
       [visit.created_at.to_i * 1000, chart_data_value(visit)]
     end
   end
-  
+
   def editable_by user
     user.nil? ? false : (user_id == user.id)
   end
