@@ -16,4 +16,5 @@ group :test, :development do
   gem 'rcov', '0.9.9'
   gem 'rspec-rails', '2.6.1'
   gem 'factory_girl_rails', '1.0.1'
+  gem 'taps', '~> 0.3.23'
 end
