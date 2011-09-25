@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Trackinator::Application.config.secret_token = '50fcf4147fd4ac9d928fd797bbfe0d3cbf301df7d83bc8e931a179deadf6cc1672656dab37cd637a5f6c39da054dafff9c87adcf0a4a57feec3c313396606de6'
+Trackinator::Application.config.secret_token = '4fda6e0b135f99d15836f77316f974de004a4a0de028b8aa487900522fa7b8ac146579860f9b9de63091ac341942cba1aa6a7aa39bca6a3bd8e1ba9fddfbe3b5'
