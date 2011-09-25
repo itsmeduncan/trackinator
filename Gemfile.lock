@@ -73,6 +73,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     multi_json (1.0.3)
+    newrelic_rpm (3.1.2)
     nokogiri (1.4.4)
     orm_adapter (0.0.5)
     pg (0.11.0)
@@ -167,6 +168,7 @@ DEPENDENCIES
   haml (= 3.1.1)
   heroku (~> 2.8.4)
   jquery-rails
+  newrelic_rpm
   nokogiri (= 1.4.4)
   pg (~> 0.11.0)
   rails (= 3.1.0)

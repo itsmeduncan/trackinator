@@ -9,6 +9,7 @@ gem 'nokogiri', '1.4.4'
 gem 'heroku', '~> 2.8.4'
 gem "devise", "~> 1.4.7"
 gem 'pg', '~> 0.11.0'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
