@@ -9,7 +9,6 @@ gem 'nokogiri', '1.4.4'
 gem 'heroku', '~> 2.8.4'
 gem "devise", "~> 1.4.7"
 gem 'pg', '~> 0.11.0'
-gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
@@ -20,7 +19,7 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
-  gem 'rcov', '0.9.9'
+  gem 'cover_me', '>= 1.2.0'
   gem 'rspec-rails', '2.6.1'
   gem 'factory_girl_rails', '1.0.1'
   gem 'taps', '~> 0.3.23'
