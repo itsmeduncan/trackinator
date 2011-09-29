@@ -19,32 +19,6 @@ class Victim < ActiveRecord::Base
     def visitable
       all.select { |victim| Time.now > (victim.last_visit + victim.interval) }
     end
-
-    def create_from_arguments arguments
-      valid_arguments = [:name, :url, :selector, :victim_type]
-      victim = Victim.new( arguments.slice(*valid_arguments) )
-      if victim.save
-        Rails.logger.info "Saved #{victim.name}!"
-      else
-        Rails.logger.error "Failed to save #{victim.name}"
-        victim.errors.full_messages.each do |error_message|
-          Rails.logger.error error_message
-        end
-      end
-    end
-
-    def destroy_from_arguments arguments
-      victim = Victim.where(:name => arguments[:name]).first
-      if victim 
-        if victim.destroy
-        Rails.logger.info "Destroyed #{victim.name}"
-        else
-          Rails.logger.error "Failed to destroy #{victim.inspect}"
-        end
-      else
-        Rails.logger.info "No such victim for #{arguments.inspect}"
-      end
-    end
   end
 
   def victim_type=(value)

@@ -28,48 +28,16 @@ describe Victim do
       Factory.build(:victim).should_not be_downloadable
     end
   end
-  
+
   describe "Victim#visitable" do
     it "should return only visitible Victims" do
       Factory(:victim, :last_visit => 3.hours.ago, :interval => 1.hour.to_i)
       Victim.visitable.should_not be_empty
     end
-    
+
     it "should return nothing if there is nothing visitable" do
       Factory(:victim, :last_visit => 1.hour.ago, :interval => 2.hours.to_i)
       Victim.visitable.should be_empty
-    end
-  end
-  
-  describe "Victim#create_from_arguments" do
-    it "should create a new Victim" do
-      victim_attributes = Factory.attributes_for(:victim)
-      lambda {
-        Victim.create_from_arguments(victim_attributes)
-      }.should change(Victim, :count).from(0).to(1)
-    end
-    
-    it "should not create a new Victim" do
-      victim_attributes = Factory.attributes_for(:victim, :name => nil)
-      lambda {
-        Victim.create_from_arguments(victim_attributes)
-      }.should_not change(Victim, :count).from(0).to(1)
-    end
-  end
-  
-  describe "Victim#destroy_from_arguments" do
-    it "should destroy the victim" do
-      victim = Factory(:victim)
-      lambda {
-        Victim.destroy_from_arguments({:name => victim.name})
-      }.should change(Victim, :count).from(1).to(0)
-    end
-    
-    it "should fail to destroy the victim" do
-      victim = Factory(:victim)
-      lambda {
-        Victim.destroy_from_arguments({:name => nil})
-      }.should_not change(Victim, :count).from(1).to(0)
     end
   end
 
@@ -123,12 +91,12 @@ describe Victim do
       victim = Factory.build(:victim, :user_id => 20_000)
       victim.editable_by(mock(User, :id => 20_000)).should be_true
     end
-    
+
     it "should be false if the user doesn't own the Victim" do
       victim = Factory.build(:victim, :user_id => 1)
       victim.editable_by(mock(User, :id => 20_000)).should be_false
     end
-    
+
     it "should be false if there is no user passed in" do
       victim = Factory.build(:victim, :user_id => 1)
       victim.editable_by(nil).should be_false
