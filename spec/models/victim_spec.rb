@@ -53,6 +53,34 @@ describe Victim do
     end
   end
 
+  describe "#visited?" do
+    it "should be true if it has visits" do
+      victim = Factory(:victim)
+      Factory(:visit, victim: victim)
+
+      victim.should be_visited
+    end
+
+    it "should be false if it has visits" do
+      victim = Factory(:victim)
+      victim.should_not be_visited
+    end
+  end
+
+  describe "#displayable?" do
+    it "should be true if it has successful visits" do
+      victim = Factory(:victim)
+      Factory(:visit, status: 200, victim: victim)
+      victim.should be_displayable
+    end
+
+    it "should be false if it has no successful visits" do
+      victim = Factory(:victim)
+      Factory(:visit, status: 404, victim: victim)
+      victim.should_not be_displayable
+    end
+  end
+
   describe "#visit!" do
     it "should raise a NotImplementedError" do
       lambda {

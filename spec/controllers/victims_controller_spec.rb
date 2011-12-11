@@ -96,6 +96,12 @@ describe VictimsController do
       get :edit, :id => victim.id
       response.should be_success
     end
+
+    it "should redirect to the rooth path" do
+      victim = Factory(:victim)
+      get :edit, :id => victim.id
+      response.should redirect_to(root_path)
+    end
   end
 
   describe "#update" do
